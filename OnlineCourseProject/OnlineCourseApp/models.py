@@ -1,38 +1,70 @@
 from django.db import models
+from django.db.models import *
 from django.utils.timezone import now
 
 
-class Category(models.Model):
-    categoryId = models.CharField(max_length=10, primary_key=True)
-    title = models.CharField(max_length=128)
+class Category(Model):
+    categoryId = CharField(max_length=10, primary_key=True)
+    title = CharField(max_length=128)
 
     def __str__(self):
         return self.title
 
 
-class Course(models.Model):
-    courseId = models.CharField(max_length=10, primary_key=True)
-    title = models.CharField(max_length=128)
-    price = models.IntegerField()
-    image = models.ImageField(upload_to='course')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+class Course(Model):
+    courseId = CharField(max_length=10, primary_key=True)
+    title = CharField(max_length=128)
+    price = FloatField()
+    image = ImageField(upload_to='course')
+    creation_date = DateField(default=now())
+    category = ForeignKey(Category, on_delete=CASCADE)
 
     def __str__(self):
         return self.title
 
 
-class Users(models.Model):
-    nationalCode = models.CharField(max_length=10, primary_key=True)
-    firstName = models.CharField(max_length=128)
-    lastName = models.CharField(max_length=128)
-    email = models.CharField(max_length=128)
+class User(Model):
+    nationalCode = CharField(max_length=10, primary_key=True)
+    firstName = CharField(max_length=128)
+    lastName = CharField(max_length=128)
+    email = CharField(max_length=128)
+    date_signup = DateField(default=now())
+
+    def __str__(self):
+        return self.firstName + self.lastName
 
 
-class Instructor(Users):
-    Course = models.ManyToManyField(Course, through='InstructorCourse')
+class Instructor(User):
+    rank = IntegerField()
+    last_education_level = CharField(max_length=8,
+                           choices=[
+                               ['Diploma','Diploma'],
+                               ['Bachelor','Bachelor'],
+                               ['Master','Master'],
+                               ['PhD','PhD']
+                           ])
+    last_education_university = CharField(max_length=50)
+    Course = ManyToManyField(Course, through='InstructorCourse')
+
+    def __str__(self):
+        return 'Instructor' + super.__str__(self)
 
 
-class InstructorCourse(models.Model):
-    Instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT)
-    Course = models.ForeignKey(Course, on_delete=models.PROTECT)
-    creation_date = models.DateField(default=now())
+class InstructorCourse(Model):
+    Instructor = ForeignKey(Instructor, on_delete=PROTECT)
+    Course = ForeignKey(Course, on_delete=PROTECT)
+    creation_date = DateField(default=now())
+
+
+class Student(User):
+    pocket_money = FloatField()
+    Course = ManyToManyField(Course, through='StudentCourse')
+
+    def __str__(self):
+        return 'Student' + super.__str__(self)
+
+
+class StudentCourse(Model):
+    date_registration = DateField(default=now())
+    Student = ForeignKey(Student, on_delete=PROTECT)
+    Course = ForeignKey(Course, on_delete=PROTECT)
