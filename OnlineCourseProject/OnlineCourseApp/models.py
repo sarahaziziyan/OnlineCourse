@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import *
 from django.utils.timezone import now
@@ -16,25 +17,22 @@ class Course(Model):
     title = CharField(max_length=128)
     price = FloatField()
     image = ImageField(upload_to='course')
-    creation_date = DateField(default=now())
+    creation_date = DateField(default=now)
     category = ForeignKey(Category, on_delete=CASCADE)
 
     def __str__(self):
         return self.title
 
 
-class User(Model):
+class CustomUser(AbstractUser):
     nationalCode = CharField(max_length=10, primary_key=True)
-    firstName = CharField(max_length=128)
-    lastName = CharField(max_length=128)
-    email = CharField(max_length=128)
-    date_signup = DateField(default=now())
+    date_signup = DateField(default=now)
 
     def __str__(self):
-        return self.firstName + self.lastName
+        return self.first_name + self.last_name
 
 
-class Instructor(User):
+class Instructor(CustomUser):
     rank = IntegerField()
     last_education_level = CharField(max_length=8,
                            choices=[
@@ -47,24 +45,24 @@ class Instructor(User):
     Course = ManyToManyField(Course, through='InstructorCourse')
 
     def __str__(self):
-        return 'Instructor' + super.__str__(self)
+        return 'Instructor' + super.__str__()
 
 
 class InstructorCourse(Model):
     Instructor = ForeignKey(Instructor, on_delete=PROTECT)
     Course = ForeignKey(Course, on_delete=PROTECT)
-    creation_date = DateField(default=now())
+    creation_date = DateField(default=now)
 
 
-class Student(User):
+class Student(CustomUser):
     pocket_money = FloatField()
     Course = ManyToManyField(Course, through='StudentCourse')
 
     def __str__(self):
-        return 'Student' + super.__str__(self)
+        return 'Student' + super.__str__()
 
 
 class StudentCourse(Model):
-    date_registration = DateField(default=now())
+    date_registration = DateField(default=now)
     Student = ForeignKey(Student, on_delete=PROTECT)
     Course = ForeignKey(Course, on_delete=PROTECT)
