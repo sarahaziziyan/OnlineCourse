@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import *
 from django.utils.timezone import now
@@ -24,7 +24,8 @@ class Course(Model):
         return self.title
 
 
-class CustomUser(AbstractUser):
+class CustomUser(User):
+    User = models.OneToOneField(User, on_delete=CASCADE)
     nationalCode = CharField(max_length=10, primary_key=True)
     date_signup = DateField(default=now)
 
