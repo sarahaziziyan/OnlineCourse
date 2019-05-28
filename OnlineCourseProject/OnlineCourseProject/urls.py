@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from OnlineCourseApp.views import hello
+from OnlineCourseApp.views import login
 
 urlpatterns = [
-    path('', hello),
+    path('', login),
     path('admin', admin.site.urls),
 ]
 
