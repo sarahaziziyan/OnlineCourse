@@ -24,7 +24,7 @@ class Course(Model):
         return self.title
 
 
-class CustomUser(User):
+class CustomUser(Model):
     User = models.OneToOneField(User, on_delete=CASCADE)
     nationalCode = CharField(max_length=10, primary_key=True)
     date_signup = DateField(default=now)
@@ -33,7 +33,8 @@ class CustomUser(User):
         return self.first_name + self.last_name
 
 
-class Instructor(CustomUser):
+class Instructor(Model):
+    CustomUser = models.OneToOneField(CustomUser, on_delete=CASCADE)
     rank = IntegerField()
     last_education_level = CharField(max_length=8,
                            choices=[
@@ -55,7 +56,8 @@ class InstructorCourse(Model):
     creation_date = DateField(default=now)
 
 
-class Student(CustomUser):
+class Student(Model):
+    CustomUser = models.OneToOneField(CustomUser, on_delete=CASCADE)
     pocket_money = FloatField()
     Course = ManyToManyField(Course, through='StudentCourse')
 
