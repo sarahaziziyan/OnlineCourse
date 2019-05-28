@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from OnlineCourseApp.views import login
+from OnlineCourseApp.views import login, sign_up
 
 urlpatterns = [
     path('', login),
     path('admin', admin.site.urls),
+    path('sign_up', sign_up, name='sign_up'),
 ]
 
 from . import settings
