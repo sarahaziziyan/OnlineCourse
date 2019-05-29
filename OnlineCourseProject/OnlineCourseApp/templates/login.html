@@ -43,16 +43,32 @@
             <fieldset>
               <legend>Please, enter your email, password and password confirmation for sign up.</legend>
               <div class="input-block">
-                <label for="signup-email">E-mail</label>
-                <input id="signup-email" type="email" required>
+                <label for="signup_first_name">FirstName</label>
+                <input id="signup_first_name" name='first_name' type="text" required>
               </div>
               <div class="input-block">
-                <label for="signup-password">Password</label>
-                <input id="signup-password" type="password" required>
+                <label for="signup_last_name">LastName</label>
+                <input id="signup_last_name" name='last_name' type="text" required>
+              </div>
+               <div class="input-block">
+                <label for="signup_national_code">nationalCode</label>
+                <input id="signup_national_code" name='national_code' type="text" required>
               </div>
               <div class="input-block">
-                <label for="signup-password-confirm">Confirm password</label>
-                <input id="signup-password-confirm" type="password" required>
+                <label for="signup_email">E-mail</label>
+                <input id="signup_email" name="email" type="email" required>
+              </div>
+              <div class="input-block">
+                <label for="signup_username">Username</label>
+                <input id="signup_username" name="username" type="text" required>
+              </div>
+              <div class="input-block">
+                <label for="signup_password">Password</label>
+                <input id="signup_password"  name="password" type="password" required>
+              </div>
+              <div class="input-block">
+                <label for="signup_password_confirm">Confirm password</label>
+                <input id="signup_password_confirm" name="password_confirm" type="password" required>
               </div>
             </fieldset>
             <button type="submit" class="btn-signup">Continue</button>
