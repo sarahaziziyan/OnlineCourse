@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from OnlineCourseApp.views import login, sign_up
 
 urlpatterns = [

@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
+{% for customUser in contactList %}
+{{ contactList.user.username }}
+{{ contactList.user.nationalCode }}
+{{ contactList.user.date_signup }}
+{% endfor %}
 
-</body>
-</html>
+<div class="pagination">
+    {% if contactList.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ contactList.previous_page_number }}">Previous</a>
+    {% endif %}
+</div>
+
+Page {{ contactList.number }} of {{ contactList.paginator.num_pages }}
+
+{% if contactList.has_next %}
+    <a href="?page={{ contactList.next_page_number }}">Next</a>
+    <a href="?page={{ contactList.num_pages }}">Last</a>
+{% endif %}

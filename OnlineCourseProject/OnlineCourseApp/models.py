@@ -25,12 +25,12 @@ class Course(Model):
 
 
 class CustomUser(Model):
-    User = models.OneToOneField(User, on_delete=CASCADE)
+    user = models.OneToOneField(User, on_delete=PROTECT)
     nationalCode = CharField(max_length=10, primary_key=True)
     date_signup = DateField(default=now)
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.user.first_name + self.user.last_name
 
 
 class Instructor(Model):
@@ -46,8 +46,8 @@ class Instructor(Model):
     last_education_university = CharField(max_length=50)
     Course = ManyToManyField(Course, through='InstructorCourse')
 
-    def __str__(self):
-        return 'Instructor' + super.__str__()
+    # def __str__(self):
+    #     return 'Instructor' + super.__str__()
 
 
 class InstructorCourse(Model):
@@ -61,8 +61,8 @@ class Student(Model):
     pocket_money = FloatField()
     Course = ManyToManyField(Course, through='StudentCourse')
 
-    def __str__(self):
-        return 'Student' + super.__str__()
+    # def __str__(self):
+    #     return 'Student' + super.__str__()
 
 
 class StudentCourse(Model):

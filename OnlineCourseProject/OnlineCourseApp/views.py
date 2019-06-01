@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -19,8 +20,15 @@ def sign_up(request):
     )
     user_ins.save()
     custom_user_ins = CustomUser(
-        user=User.objects.get(username=request.POST['username']),
+        user=user_ins,
         nationalCode=request.POST['national_code'],
     )
     custom_user_ins.save()
     return render(request, "dashboard.html", {});
+
+
+def listing(requset):
+    contactList = CustomUser.objects.all()
+    paginator  = Paginator(contactList, 2)
+    page = requset.GET.get('page' , 1)
+    return render(requset, 'dashboard.html', {'contacts',contactList})
