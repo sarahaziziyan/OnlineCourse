@@ -21,6 +21,7 @@ urlpatterns = [
     path('', login),
     path('admin', admin.site.urls),
     path('sign_up', sign_up, name='sign_up'),
+    path('login', login, name='login'),
 ]
 
 from . import settings
