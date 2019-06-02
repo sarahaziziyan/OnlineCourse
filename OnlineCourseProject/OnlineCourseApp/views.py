@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -25,22 +25,21 @@ def login(request):
 
 
 def sign_up(request):
-    u = UserCreationForm(request.POST)
-    UserCreationForm.
-    if u.is_valid():
-        u.save()
-        # return HttpResponse('Done')
-        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
+    password2=request.POST['password_confirm'],
+    password = request.POST['password'],
+    if(password==password2):
+        password = make_password(password, salt=None, hasher='default')
+
+        user_ins = User(
+            email=request.POST['email'],
+            username=request.POST['username'],
+            password=password,
+        )
+        # user_ins.set_unusable_password()
+        user_ins.save()
+        return render(request, "login.html", {'errorMsg':'لطفا وارد شوید'});
     else:
-        #return HttpResponse('Error')
-        return render(request, "login.html", {'errorMsg': 'عملیات ثبت کاربر با خطا مواجه شد'});
-    # user_ins = User(
-    #     email=request.POST['email'],
-    #     username=request.POST['username'],
-    #     password=request.POST['password'],
-    # )
-    # user_ins.save()
-    # return render(request, "login.html", {'errorMsg':'لطفا وارد شوید'});
+        return render(request, "login.html", {'errorMsg': 'پسورد و تکرار آن متفاوت هستند'});
 
 
 # def listing(requset):
