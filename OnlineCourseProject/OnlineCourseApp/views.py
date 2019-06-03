@@ -25,18 +25,12 @@ def login(request):
 
 
 def sign_up(request):
-    password2=request.POST['password_confirm'],
-    password = request.POST['password'],
-    if(password==password2):
-        password = make_password(password, salt=None, hasher='default')
-
-        user_ins = User(
-            email=request.POST['email'],
-            username=request.POST['username'],
-            password=password,
-        )
-        # user_ins.set_unusable_password()
-        user_ins.save()
+    password2 = request.POST['password_confirm']
+    password = request.POST['password']
+    if password == password2:
+        email = request.POST['email']
+        username = request.POST['username']
+        new_user = User.objects.create_user(username=username, email=email, password=password)
         return render(request, "login.html", {'errorMsg':'لطفا وارد شوید'});
     else:
         return render(request, "login.html", {'errorMsg': 'پسورد و تکرار آن متفاوت هستند'});
