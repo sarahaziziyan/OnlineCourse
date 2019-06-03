@@ -19,7 +19,7 @@ def login(request):
         if user is None:
             return render(request, "login.html", {'errorMsg':'نام کاربری یا کلمه عبور اشتباه است'} )
         else:
-            return render(request, "dashboard.html", {})
+            return render(request, "dashboard.html", {'firstname':user.first_name , 'lastname':user.last_name})
     else:
         return render(request, "login.html", {})
 
