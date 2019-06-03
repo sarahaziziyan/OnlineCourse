@@ -1,19 +1,13 @@
-{% for customUser in contactList %}
-{{ contactList.user.username }}
-{{ contactList.user.nationalCode }}
-{{ contactList.user.date_signup }}
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% load static %}
+    <link rel='stylesheet' type='text/css' href="{% static 'css/dashboard.css' %}" />
+    <script type='text/javascript' charset='utf8' src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
 
-<div class="pagination">
-    {% if contactList.has_previous %}
-        <a href="?page=1">First</a>
-        <a href="?page={{ contactList.previous_page_number }}">Previous</a>
-    {% endif %}
-</div>
-
-Page {{ contactList.number }} of {{ contactList.paginator.num_pages }}
-
-{% if contactList.has_next %}
-    <a href="?page={{ contactList.next_page_number }}">Next</a>
-    <a href="?page={{ contactList.num_pages }}">Last</a>
-{% endif %}
+</head>
+<body>
+</body>
+</html>
