@@ -36,6 +36,9 @@ def sign_up(request):
         return render(request, "login.html", {'errorMsg': 'پسورد و تکرار آن متفاوت هستند'});
 
 
+def logout(request):
+    return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
+
 # def listing(requset):
 #     contactList = CustomUser.objects.all()
 #     paginator  = Paginator(contactList, 2)
