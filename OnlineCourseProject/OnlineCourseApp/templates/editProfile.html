@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+    <form action="{% url 'update_profile_data' %}" method="POST">
+        {% csrf_token %}
+        <h2>Edit Profile:</h2><br>
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <input type="submit" value="Update"><br>
+        <input type="hidden" value="{{username}}" name="unique">
+    </form>
+
+</body>
+</html>

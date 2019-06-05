@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .forms import CustomUserChangeForm
 from .models import CustomUser
 from django.contrib.auth.models import User
 
@@ -38,6 +39,17 @@ def sign_up(request):
 
 def logout(request):
     return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
+
+
+def edit_profile(request):
+    customUserForm = CustomUserChangeForm();
+    if(request.user.is_authenticated):
+        return render(request, "editProfile.html", {});
+    else:
+        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
+
+def update_profile_data(requset):
+    return HttpResponse('yes')
 
 # def listing(requset):
 #     contactList = CustomUser.objects.all()
