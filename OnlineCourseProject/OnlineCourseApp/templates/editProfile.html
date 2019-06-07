@@ -10,7 +10,8 @@
         {% csrf_token %}
         <h2>Edit Profile:</h2><br>
         <table>
-            {{ form.as_table }}
+            {{ customUserform.as_table }}
+            {{ userForm.as_table }}
         </table>
         <br>
         <input type="submit" value="Update"><br>

@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import CustomUserChangeForm
+from .forms import *
 from .models import CustomUser
 from django.contrib.auth.models import User
 
@@ -42,9 +42,10 @@ def logout(request):
 
 
 def edit_profile(request):
-    customUserForm = CustomUserChangeForm();
-    if(request.user.is_authenticated):
-        return render(request, "editProfile.html", {});
+    userForm = UserForm();
+    customUserForm = CustomUserForm();
+    if request.user.is_authenticated:
+        return render(request, "editProfile.html", {'userForm':userForm , 'customUserForm':customUserForm});
     else:
         return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
 
