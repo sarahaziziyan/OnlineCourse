@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import csrf
 
 from .forms import *
 from .models import CustomUser
@@ -20,7 +21,11 @@ def login(request):
         if user is None:
             return render(request, "login.html", {'errorMsg':'نام کاربری یا کلمه عبور اشتباه است'} )
         else:
-            return render(request, "dashboard.html", {'firstname':user.first_name , 'lastname':user.last_name})
+            args = {}
+            args.update(csrf(request))
+            args['firstname'] = user.first_name
+            args['lastname'] = user.last_name
+            return render(request, "dashboard.html", args)
     else:
         return render(request, "login.html", {})
 
@@ -32,7 +37,10 @@ def sign_up(request):
         email = request.POST['email']
         username = request.POST['username']
         new_user = User.objects.create_user(username=username, email=email, password=password)
-        return render(request, "login.html", {'errorMsg':'لطفا وارد شوید'});
+        args = {}
+        args.update(csrf(request))
+        args['errorMsg'] = 'لطفا وارد شوید'
+        return render(request, "login.html", args);
     else:
         return render(request, "login.html", {'errorMsg': 'پسورد و تکرار آن متفاوت هستند'});
 
@@ -42,6 +50,8 @@ def logout(request):
 
 
 def edit_profile(request):
+    print(request.user)
+    print(request.user.username)
     userForm = UserForm();
     customUserForm = CustomUserForm();
     if request.user.is_authenticated:
@@ -49,8 +59,14 @@ def edit_profile(request):
     else:
         return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
 
+
 def update_profile_data(requset):
     return HttpResponse('yes')
+
+
+def bootstrapDemo(request):
+    userForm = UserForm();
+    return render(request, "bootstrapDemo.html",{'form':userForm})
 
 # def listing(requset):
 #     contactList = CustomUser.objects.all()

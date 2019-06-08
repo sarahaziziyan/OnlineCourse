@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout', logout, name='logout'),
     path('edit_profile', edit_profile, name='edit_profile'),
     path('update_profile_data', update_profile_data, name='update_profile_data'),
+    path('bootstrapDemo', bootstrapDemo),
 ]
 
 from . import settings
