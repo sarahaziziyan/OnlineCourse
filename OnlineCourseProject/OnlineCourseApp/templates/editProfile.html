@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Profile</title>
-</head>
-<body>
+{# Load the tag library #}
+{% load bootstrap3 %}
 
-    <form action="{% url 'update_profile_data' %}" method="POST">
-        {% csrf_token %}
-        <h2>Edit Profile:</h2><br>
-        <table>
-            {{ customUserform.as_table }}
-            {{ userForm.as_table }}
-        </table>
-        <br>
-        <input type="submit" value="Update"><br>
-        <input type="hidden" value="{{username}}" name="unique">
-    </form>
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-</body>
-</html>
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+
+{# Display a form #}
+<form action="{% url 'update_profile_data' %}" method="post" class="form">
+  {% csrf_token %}
+  <h2>Edit Profile:</h2><br>
+  {% bootstrap_form form %}
+<!--  {% bootstrap_form userForm %}-->
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Update
+    </button>
+  {% endbuttons %}
+</form>

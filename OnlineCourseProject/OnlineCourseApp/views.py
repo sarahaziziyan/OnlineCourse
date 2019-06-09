@@ -55,7 +55,7 @@ def edit_profile(request):
     userForm = UserForm();
     customUserForm = CustomUserForm();
     if request.user.is_authenticated:
-        return render(request, "editProfile.html", {'userForm':userForm , 'customUserForm':customUserForm});
+        return render(request, "editProfile.html", {'userForm':userForm , 'form':customUserForm});
     else:
         return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
 
