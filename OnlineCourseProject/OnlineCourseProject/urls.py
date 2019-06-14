@@ -3,10 +3,10 @@ from django.urls import path
 from OnlineCourseApp.views import *
 
 urlpatterns = [
-    path('', login),
+    path('', myLogin),
     path('admin', admin.site.urls),
     path('sign_up', sign_up, name='sign_up'),
-    path('login', login, name='login'),
+    path('login', myLogin, name='login'),
     path('logout', logout, name='logout'),
     path('edit_profile', edit_profile, name='edit_profile'),
     path('update_profile_data', update_profile_data, name='update_profile_data'),

@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
 from django.http import HttpResponse
@@ -10,7 +10,7 @@ from .models import CustomUser
 from django.contrib.auth.models import User
 
 
-def login(request):
+def myLogin(request):
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
     user = authenticate(username=username, password=password)
@@ -25,6 +25,7 @@ def login(request):
             args.update(csrf(request))
             args['firstname'] = user.first_name
             args['lastname'] = user.last_name
+            login(request, user)
             return render(request, "dashboard.html", args)
     else:
         return render(request, "login.html", {})
@@ -46,18 +47,18 @@ def sign_up(request):
 
 
 def logout(request):
-    return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
+    return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
 
 
 def edit_profile(request):
     print(request.user)
     print(request.user.username)
-    userForm = UserForm();
-    customUserForm = CustomUserForm();
+    userForm = UserForm()
+    customUserForm = CustomUserForm()
     if request.user.is_authenticated:
-        return render(request, "editProfile.html", {'userForm':userForm , 'form':customUserForm});
+        return render(request, "editProfile.html", {'userForm':userForm , 'form':customUserForm})
     else:
-        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'});
+        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
 
 
 def update_profile_data(requset):
