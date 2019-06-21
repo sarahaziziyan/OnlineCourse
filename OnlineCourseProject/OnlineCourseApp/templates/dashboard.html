@@ -19,5 +19,9 @@
         </div>
         <div id="logoutDvi"><a href="/logout">Logout</a></div>
     </div>
+    <div>
+        {{ request.session.lastLoginTime }}
+        {{ request.session.electronicWallet }}
+    </div>
 </body>
 </html>

@@ -1,3 +1,7 @@
+import datetime
+import json
+from encodings.utf_8 import encode
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
@@ -26,10 +30,11 @@ def myLogin(request):
             args['firstname'] = user.first_name
             args['lastname'] = user.last_name
             login(request, user)
+            request.session['lastLoginTime'] = str(datetime.datetime.now())
+            request.session['electronicWallet'] = 100000
             return render(request, "dashboard.html", args)
     else:
         return render(request, "login.html", {})
-
 
 def sign_up(request):
     password2 = request.POST['password_confirm']
