@@ -1,0 +1,40 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses List</title>
+
+</head>
+<body>
+{% include 'headerMenu.html' %}
+<table border="2">
+    <tr>
+        <th>image</th>
+        <th>courseId</th>
+        <th>title</th>
+        <th>price</th>
+        <th>category</th>
+    </tr>
+    {% for course in courses %}
+        <tr>
+            <td><img src="{{course.image.url}}"></td>
+            <td>{{course.courseId}}</td>
+            <td>{{course.title}}</td>
+            <td>{{course.price}}</td>
+            <td>{{course.category}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

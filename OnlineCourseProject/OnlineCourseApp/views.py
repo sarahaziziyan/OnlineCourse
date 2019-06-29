@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.template.context_processors import csrf
 
 from .forms import *
-from .models import CustomUser
+from .models import CustomUser, Course
 from django.contrib.auth.models import User
 
 
@@ -73,6 +73,15 @@ def update_profile_data(requset):
 def bootstrapDemo(request):
     userForm = UserForm();
     return render(request, "bootstrapDemo.html",{'form':userForm})
+
+
+def search_courses(request):
+    courses = Course.objects.all()
+    return render(request, 'search_courses.html', {'courses': courses})
+
+def my_courses(request):
+    pass
+
 
 # def listing(requset):
 #     contactList = CustomUser.objects.all()

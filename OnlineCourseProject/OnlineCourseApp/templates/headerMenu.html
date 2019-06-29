@@ -1,0 +1,16 @@
+{% load static %}
+<link rel='stylesheet' type='text/css' href="{% static 'css/dashboard.css' %}" />
+<div id="topPageDiv">
+    <div id="userInfromationDiv">
+        <form method="Pupdate_profile_dataOST" action="{% url 'edit_profile' %}">
+            {% csrf_token %}
+            <input type="submit" id="editProfile" name="changeInfo" value="Edit Profile"/>
+        </form>
+        <div id="firsname_lastname" name="firsname_lastname">{{ firstname }} {{ lastname }}</div>
+    </div>
+    <div id="logoutDvi"><a href="/logout">Logout</a></div>
+</div>
+<div>
+    {{ request.session.lastLoginTime }}
+    {{ request.session.electronicWallet }}
+</div>
