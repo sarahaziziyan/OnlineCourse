@@ -18,3 +18,18 @@ body{
     width : 60px;
     float: left;
 }
+
+.courseImage{
+    max-height: 80px;
+    max-width: 80px;
+}
+
+.searchCourseTableContainer{
+    width : 80%;
+    margin : 50px auto;
+}
+
+.searchCourseTableContainer table{
+    background : white;
+    border-radius : 5px;
+}
