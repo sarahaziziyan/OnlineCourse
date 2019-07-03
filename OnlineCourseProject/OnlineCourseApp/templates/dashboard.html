@@ -11,9 +11,9 @@
 <body>
     {% include 'headerMenu.html' %}
     <div id="dashboardMenu" dir="rtl">
-        <a href="{% url 'search_courses' %}"><img src="{% static 'images/searchCourses.png' %}"></a>
-        <a href="{% url 'my_courses' %}"><img src="{% static 'images/myCourses.png' %}"></a>
-        <a href="{% url 'edit_profile' %}"><img src="{% static 'images/editProfile.png' %}"></a>
+        <a class="dashboardMenuIcon" href="{% url 'search_courses' %}"><img src="{% static 'images/searchCourses.png' %}"></a>
+        <a class="dashboardMenuIcon" href="{% url 'my_courses' %}"><img src="{% static 'images/myCourses.png' %}"></a>
+        <a class="dashboardMenuIcon" href="{% url 'edit_profile' %}"><img src="{% static 'images/editProfile.png' %}"></a>
     </div>
 </body>
 </html>

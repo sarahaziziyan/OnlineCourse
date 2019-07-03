@@ -33,3 +33,19 @@ body{
     background : white;
     border-radius : 5px;
 }
+
+#dashboardMenu {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.dashboardMenuIcon{
+    margin : 0 20px;
+    width: 200px;
+    height: 200px;
+    transition: transform .2s; /* Animation */
+}
+
+.dashboardMenuIcon:hover {
+  transform: scale(1.1);
+}
