@@ -76,8 +76,14 @@ def bootstrapDemo(request):
 
 
 def search_courses(request):
-    courses = Course.objects.all()
-    return render(request, 'search_courses.html', {'courses': courses})
+    if request.user.is_authenticated:
+        coursesList = Course.objects.all()
+        paginator  = Paginator(coursesList, 5)
+        page = request.GET.get('page' , 1)
+        courses = paginator.get_page(page)
+        return render(request, 'search_courses.html', {'courses': courses})
+    else:
+        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
 
 def my_courses(request):
     pass
