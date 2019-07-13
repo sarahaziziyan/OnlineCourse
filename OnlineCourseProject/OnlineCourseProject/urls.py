@@ -5,7 +5,7 @@ from django.urls import path
 from OnlineCourseApp.views import *
 
 urlpatterns = [
-    path('', myLogin),
+    path('', index, name='index'),
     path('admin', admin.site.urls),
     path('admin/', admin.site.urls),
     path('sign_up', sign_up, name='sign_up'),

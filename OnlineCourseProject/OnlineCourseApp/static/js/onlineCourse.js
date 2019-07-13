@@ -8,4 +8,7 @@ $(document).ready(function(){
         })
     })
 
+    $(".trCourse").click(function(){
+
+    })
 })

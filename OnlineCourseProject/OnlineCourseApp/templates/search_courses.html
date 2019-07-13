@@ -29,7 +29,7 @@
             </tr>
         </thead>
         {% for course in courses %}
-            <tr>
+            <tr title="مشاهده درس" style="cursor:pointer" class="trCourse">
                 <td><img class='courseImage' src="{{course.image.url}}"></td>
                 <td>{{course.courseId}}</td>
                 <td>{{course.title}}</td>

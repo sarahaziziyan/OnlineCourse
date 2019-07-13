@@ -14,6 +14,9 @@ from .models import CustomUser, Course
 from django.contrib.auth.models import User
 
 
+def index(request):
+    return render(request, "index.html", {})
+
 def myLogin(request):
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
