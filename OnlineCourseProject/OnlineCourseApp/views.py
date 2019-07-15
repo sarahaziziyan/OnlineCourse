@@ -15,7 +15,14 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-    return render(request, "index.html", {})
+    coursesList = Course.objects.all()
+    paginator = Paginator(coursesList, 2)
+    page = request.GET.get('page', 1)
+    courses = paginator.get_page(page)
+    return render(request, "index.html", {'courses': courses})
+
+def index_premade(request):
+    return render(request, "index_premade.html", {})
 
 def myLogin(request):
     username = request.POST.get('username', None)

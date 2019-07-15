@@ -1,24 +1,3 @@
-body{
-    background: rgb(28,239,255);
-    background: radial-gradient(circle, rgba(28,239,255,1) 0%, rgba(213,213,187,1) 100%);
-}
-
-#topPageDiv{
-    color : white;
-    height : 60px;
-    width :100%;
-    background : rgba(45, 88, 91, 0.37);
-}
-
-#userInfromationDiv{
-    width : 100px;
-}
-
-#logoutDiv{
-    width : 60px;
-    float: left;
-}
-
 .courseImage{
     max-height: 80px;
     max-width: 80px;
@@ -32,20 +11,4 @@ body{
 .searchCourseTableContainer table{
     background : white;
     border-radius : 5px;
-}
-
-#dashboardMenu {
-    width: 900px;
-    margin: 0 auto;
-}
-
-.dashboardMenuIcon{
-    margin : 0 20px;
-    width: 200px;
-    height: 200px;
-    transition: transform .2s; /* Animation */
-}
-
-.dashboardMenuIcon:hover {
-  transform: scale(1.1);
 }
