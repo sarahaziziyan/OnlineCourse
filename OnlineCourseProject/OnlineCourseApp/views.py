@@ -14,15 +14,27 @@ from .models import CustomUser, Course
 from django.contrib.auth.models import User
 
 
-def index(request):
-    coursesList = Course.objects.all()
-    paginator = Paginator(coursesList, 2)
+def giveCoursesPage(request,coursesList):
+    paginator = Paginator(coursesList, 3)
     page = request.GET.get('page', 1)
     courses = paginator.get_page(page)
-    return render(request, "index.html", {'courses': courses})
+    return render(request, 'index.html', {'courses': courses})
+
+
+def index(request):
+    coursesList = Course.objects.all()
+    return giveCoursesPage(request,coursesList)
+
 
 def index_premade(request):
     return render(request, "index_premade.html", {})
+
+
+def search_courses(request):
+    title = request.POST.get('searchCourseInput', '')
+    coursesList = Course.objects.filter(title__contains=title)
+    return giveCoursesPage(request, coursesList)
+
 
 def myLogin(request):
     username = request.POST.get('username', None)
@@ -85,15 +97,15 @@ def bootstrapDemo(request):
     return render(request, "bootstrapDemo.html",{'form':userForm})
 
 
-def search_courses(request):
-    if request.user.is_authenticated:
-        coursesList = Course.objects.all()
-        paginator  = Paginator(coursesList, 5)
-        page = request.GET.get('page' , 1)
-        courses = paginator.get_page(page)
-        return render(request, 'search_courses.html', {'courses': courses})
-    else:
-        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
+# def search_courses(request):
+#     if request.user.is_authenticated:
+#         coursesList = Course.objects.all()
+#         paginator  = Paginator(coursesList, 5)
+#         page = request.GET.get('page' , 1)
+#         courses = paginator.get_page(page)
+#         return render(request, 'search_courses.html', {'courses': courses})
+#     else:
+#         return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
 
 def my_courses(request):
     pass

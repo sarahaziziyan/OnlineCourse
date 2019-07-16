@@ -136,7 +136,7 @@ body {
 
 h1::after {
     content: " ";
-    border: solid 2px #2f9484;
+    border: solid 2px #5bc0de;
     display: block;
     width: 200px;
     margin: 12px auto;
