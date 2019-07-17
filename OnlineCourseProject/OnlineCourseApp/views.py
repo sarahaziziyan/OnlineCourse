@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.template.context_processors import csrf
 
 from .forms import *
-from .models import CustomUser, Course
+from .models import CustomUser, Course, Instructor
 from django.contrib.auth.models import User
 
 
@@ -35,6 +35,8 @@ def search_courses(request):
     coursesList = Course.objects.filter(title__contains=title)
     return giveCoursesPage(request, coursesList)
 
+def remove_search_courses(request):
+    return index(request)
 
 def myLogin(request):
     username = request.POST.get('username', None)
@@ -47,14 +49,15 @@ def myLogin(request):
         if user is None:
             return render(request, "login.html", {'errorMsg':'نام کاربری یا کلمه عبور اشتباه است'} )
         else:
+            coursesList = Course.objects.all()
             args = {}
             args.update(csrf(request))
-            args['firstname'] = user.first_name
-            args['lastname'] = user.last_name
+            args['username'] = username
+            args['courses'] = coursesList
             login(request, user)
             request.session['lastLoginTime'] = str(datetime.datetime.now())
             request.session['electronicWallet'] = 100000
-            return render(request, "dashboard.html", args)
+            return render(request, "index.html", args)
     else:
         return render(request, "login.html", {})
 
@@ -64,7 +67,20 @@ def sign_up(request):
     if password == password2:
         email = request.POST['email']
         username = request.POST['username']
+        userType = request.POST['userType']
         new_user = User.objects.create_user(username=username, email=email, password=password)
+        custom_user_ins = CustomUser(
+            user=User.objects.get(username=request.POST['username']),
+            userType=userType,
+        )
+        custom_user_ins.save()
+        if userType=="instructor":
+            instructor_ins = Instructor.objects.create(customUser=custom_user_ins,rank=0)
+            instructor_ins.save()
+        else:
+            student_ins = Instructor.objects.create(customUser=custom_user_ins,pocket_money=0)
+            student_ins.save()
+
         args = {}
         args.update(csrf(request))
         args['errorMsg'] = 'لطفا وارد شوید'

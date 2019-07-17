@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -29,12 +30,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img class="logo-custom" src="{% static 'img/logo180-50.png' %}" alt=""  /></a>
+                <a class="navbar-brand" href="#">
+                    <img class="logo-custom" src="{% static 'img/logo180-50.png' %}" alt=""  />
+                    <div id="username" name="firsname_lastname"> WELCOME {{ username }}</div>
+                </a>
             </div>
             <div class="navbar-collapse collapse move-me">
                 <ul class="nav navbar-nav navbar-right">
                     <li ><a href="#home">HOME</a></li>
-                     <li><a href="#courseSearch-sec">COURSES</a></li>
+                    <li ><a href="{% url 'login' %}" id="loginButtonMenu">LOGIN</a></li>
+                    <li ><a href="{% url 'login' %}" id="signupButtonMenu">SIGNUP</a></li>
+                    <li><a href="#courseSearch-sec">COURSES</a></li>
                 </ul>
             </div>
 
@@ -124,7 +130,8 @@
                          <form class="searchCourse" action="{% url 'search_courses' %}" method="post">
                             {% csrf_token %}
                             <input type="text" placeholder="Search.." name="searchCourseInput">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                            <button type="submit" buttonType="search"><i class="fa fa-search"></i></button>
+<!--                            <button type="submit" buttonType="removeSearch"><i class="fa fa-cross"></i></button>-->
                         </form>
                      </p>
                  </div>
@@ -175,8 +182,10 @@
     </div>
     <!--  courseSearch-sec End  -->
     <div id="footer">
-          &copy 2014 yourdomain.com | All Rights Reserved |  <a href="http://binarytheme.com" style="color: #fff" target="_blank">Design by : binarytheme.com</a>
+          &copy 2014 sarahaziziyan.com | All Rights Reserved |  <a href="http://sarahaziziyan.com" style="color: #fff" target="_blank">Design by : sarahaziziyan.com</a>
     </div>
+
+
      <!-- FOOTER SECTION END-->
 
     <!--  Jquery Core Script -->
@@ -190,6 +199,7 @@
     <!--  Scroll Scripts -->
     <script src="{% static 'js/jquery.easing.min.js' %}"></script>
     <!--  Custom Scripts -->
-         <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/onlineCourse.js' %}"></script>
 </body>
 </html>

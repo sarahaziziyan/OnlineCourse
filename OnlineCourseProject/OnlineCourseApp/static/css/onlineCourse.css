@@ -46,3 +46,7 @@ form.searchCourse::after {
   clear: both;
   display: table;
 }
+
+#removeSearch{
+    background : red !important;
+}

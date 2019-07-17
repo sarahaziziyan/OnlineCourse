@@ -8,7 +8,16 @@ $(document).ready(function(){
         })
     })
 
-    $(".trCourse").click(function(){
-
+    $("#loginButtonMenu").click(function(){
+        $("#loginForms").show();
     })
+
+    $("#signupButtonMenu").click(function(){
+        $("#loginForms").show();
+    })
+
 })
+
+function readCSRF(element){
+    return $(element).find("[name='csrfmiddlewaretoken']").val();
+}
