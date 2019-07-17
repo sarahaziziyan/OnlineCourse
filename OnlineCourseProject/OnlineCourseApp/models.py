@@ -26,7 +26,7 @@ class Course(Model):
 
 class CustomUser(Model):
     user = models.OneToOneField(User, on_delete=PROTECT)
-    userTye = CharField(max_length=30)
+    userType = CharField(max_length=30)
     nationalCode = CharField(max_length=10, primary_key=True)
     date_signup = DateField(default=now)
 

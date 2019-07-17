@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.template.context_processors import csrf
 
 from .forms import *
-from .models import CustomUser, Course, Instructor
+from .models import CustomUser, Course, Instructor, Student
 from django.contrib.auth.models import User
 
 
@@ -78,7 +78,7 @@ def sign_up(request):
             instructor_ins = Instructor.objects.create(customUser=custom_user_ins,rank=0)
             instructor_ins.save()
         else:
-            student_ins = Instructor.objects.create(customUser=custom_user_ins,pocket_money=0)
+            student_ins = Student.objects.create(customUser=custom_user_ins,pocket_money=0)
             student_ins.save()
 
         args = {}
