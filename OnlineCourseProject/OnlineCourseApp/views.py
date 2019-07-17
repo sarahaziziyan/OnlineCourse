@@ -75,10 +75,10 @@ def sign_up(request):
         )
         custom_user_ins.save()
         if userType=="instructor":
-            instructor_ins = Instructor.objects.create(customUser=custom_user_ins,rank=0)
+            instructor_ins = Instructor.objects.create(customUser=CustomUser.objects.get(user=custom_user_ins.user),rank=0)
             instructor_ins.save()
         else:
-            student_ins = Student.objects.create(customUser=custom_user_ins,pocket_money=0)
+            student_ins = Student.objects.create(customUser=CustomUser.objects.get(user=custom_user_ins.user),pocket_money=0)
             student_ins.save()
 
         args = {}

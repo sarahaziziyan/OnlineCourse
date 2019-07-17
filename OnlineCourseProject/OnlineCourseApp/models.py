@@ -35,7 +35,7 @@ class CustomUser(Model):
 
 
 class Instructor(Model):
-    CustomUser = models.OneToOneField(CustomUser, on_delete=CASCADE)
+    customUser = models.OneToOneField(CustomUser, on_delete=CASCADE)
     rank = IntegerField()
     last_education_level = CharField(max_length=8,
                            choices=[
@@ -58,7 +58,7 @@ class InstructorCourse(Model):
 
 
 class Student(Model):
-    CustomUser = models.OneToOneField(CustomUser, on_delete=CASCADE)
+    customUser = models.OneToOneField(CustomUser, on_delete=CASCADE)
     pocket_money = FloatField()
     Course = ManyToManyField(Course, through='StudentCourse')
 
