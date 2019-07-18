@@ -40,9 +40,20 @@
             <div class="navbar-collapse collapse move-me">
                 <ul class="nav navbar-nav navbar-right">
                     <li ><a href="#home">HOME</a></li>
-                    <li ><a href="{% url 'login' %}" id="loginButtonMenu">LOGIN</a></li>
-                    <li ><a href="{% url 'login' %}" id="signupButtonMenu">SIGNUP</a></li>
+                    {% if username is None %}
+                        <li ><a href="{% url 'login' %}" id="loginButtonMenu">LOGIN</a></li>
+                        <li ><a href="{% url 'login' %}" id="signupButtonMenu">SIGNUP</a></li>
+                    {% endif %}
                     <li><a href="#courseSearch-sec">COURSES</a></li>
+                    {% if userType == 'instructor' %}
+                        <li ><a href="{% url 'create_course' %}">CREATE COURSE</a></li>
+                    {% endif %}
+                    {% if userType == 'student' %}
+                        <li ><a href="{% url 'dashboard_course' %}">MY COURSES</a></li>
+                    {% endif %}
+                    {% if username is not None %}
+                        <li ><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    {% endif %}
                 </ul>
             </div>
 

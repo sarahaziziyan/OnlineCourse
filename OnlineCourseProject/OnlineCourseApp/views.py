@@ -54,7 +54,7 @@ def myLogin(request):
         if user is None:
             return render(request, "login.html", {'errorMsg':'نام کاربری یا کلمه عبور اشتباه است'} )
         else:
-            customUserType = CustomUser.objects.get(user=user).values('userType')
+            customUserType = CustomUser.objects.get(user=user).userType
             coursesList = Course.objects.all()
             args = {}
             args.update(csrf(request))
@@ -99,6 +99,11 @@ def sign_up(request):
 def logout(request):
     return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
 
+def dashboard_course(request):
+    pass
+
+def create_course(request):
+    pass
 
 def edit_profile(request):
     print(request.user)
