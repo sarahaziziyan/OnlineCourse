@@ -12,6 +12,7 @@ urlpatterns = [
     path('login', myLogin, name='login'),
     path('logout', logout, name='logout'),
     path('create_course', create_course, name='create_course'),
+    path('save_course', save_course, name='save_course'),
     path('dashboard_course', dashboard_course, name='dashboard_course'),
     path('edit_profile', edit_profile, name='edit_profile'),
     path('update_profile_data', update_profile_data, name='update_profile_data'),

@@ -1,7 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import CustomUser
+from .models import CustomUser, Course
+
+
+class CourseForm(ModelForm):
+    class Meta:
+        fields = '__all__'
+        model = Course
 
 
 class UserForm(ModelForm):

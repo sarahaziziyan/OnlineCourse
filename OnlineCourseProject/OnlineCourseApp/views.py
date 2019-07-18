@@ -5,13 +5,15 @@ from encodings.utf_8 import encode
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template.context_processors import csrf
 
 from .forms import *
 from .models import CustomUser, Course, Instructor, Student
 from django.contrib.auth.models import User
+from django.contrib import messages
+from .forms import *
 
 
 def giveCoursesPage(request,coursesList, args):
@@ -103,7 +105,11 @@ def dashboard_course(request):
     pass
 
 def create_course(request):
+    return render(request, 'create_courses.html' , {'form': CourseForm()})
+
+def save_course(request):
     pass
+
 
 def edit_profile(request):
     print(request.user)
