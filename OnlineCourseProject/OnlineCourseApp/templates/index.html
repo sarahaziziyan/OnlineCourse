@@ -32,7 +32,9 @@
                 </button>
                 <a class="navbar-brand" href="#">
                     <img class="logo-custom" src="{% static 'img/logo180-50.png' %}" alt=""  />
-                    <div id="username" name="firsname_lastname"> WELCOME {{ username }}</div>
+                    {% if username is not None %}
+                        <div id="username" name="firsname_lastname"> WELCOME {{ username }}</div>
+                    {% endif %}
                 </a>
             </div>
             <div class="navbar-collapse collapse move-me">

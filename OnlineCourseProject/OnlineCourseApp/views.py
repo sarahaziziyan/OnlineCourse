@@ -14,16 +14,21 @@ from .models import CustomUser, Course, Instructor, Student
 from django.contrib.auth.models import User
 
 
-def giveCoursesPage(request,coursesList):
+def giveCoursesPage(request,coursesList, args):
     paginator = Paginator(coursesList, 3)
     page = request.GET.get('page', 1)
     courses = paginator.get_page(page)
-    return render(request, 'index.html', {'courses': courses})
+    args['courses'] = coursesList
+    return render(request, 'index.html', args)
 
 
 def index(request):
     coursesList = Course.objects.all()
-    return giveCoursesPage(request,coursesList)
+    args = {}
+    args.update(csrf(request))
+    args['username'] = None
+    args['userType'] = None
+    return giveCoursesPage(request, coursesList, args)
 
 
 def index_premade(request):
@@ -49,10 +54,12 @@ def myLogin(request):
         if user is None:
             return render(request, "login.html", {'errorMsg':'نام کاربری یا کلمه عبور اشتباه است'} )
         else:
+            customUserType = CustomUser.objects.get(user=user).values('userType')
             coursesList = Course.objects.all()
             args = {}
             args.update(csrf(request))
             args['username'] = username
+            args['userType'] = customUserType
             args['courses'] = coursesList
             login(request, user)
             request.session['lastLoginTime'] = str(datetime.datetime.now())
