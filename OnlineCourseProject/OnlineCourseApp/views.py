@@ -42,8 +42,10 @@ def search_courses(request):
     coursesList = Course.objects.filter(title__contains=title)
     return giveCoursesPage(request, coursesList)
 
+
 def remove_search_courses(request):
     return index(request)
+
 
 def myLogin(request):
     username = request.POST.get('username', None)
@@ -67,9 +69,11 @@ def myLogin(request):
             request.session['lastLoginTime'] = str(datetime.datetime.now())
             request.session['electronicWallet'] = 100000
             request.session['userType'] = customUserType
+            request.session['username'] = username
             return render(request, "index.html", args)
     else:
         return render(request, "login.html", {})
+
 
 def sign_up(request):
     password2 = request.POST['password_confirm']
@@ -102,6 +106,7 @@ def sign_up(request):
 def logout(request):
     return render(request, "login.html", {'errorMsg': 'Please Login'})
 
+
 def dashboard_course(request):
     pass
 
@@ -115,8 +120,19 @@ def create_course(request):
     else:
         return render(request, "login.html", {'errorMsg': 'Please login'})
 
+
 def save_course(request):
-    pass
+    form = CourseForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+    else:
+        print(form.errors)
+    coursesList = Course.objects.all()
+    args = {}
+    args.update(csrf(request))
+    args['username'] = request.session.get('username', None)
+    args['userType'] = request.session.get('userType', None)
+    return giveCoursesPage(request, coursesList, args)
 
 
 def edit_profile(request):
@@ -138,23 +154,5 @@ def bootstrapDemo(request):
     userForm = UserForm();
     return render(request, "bootstrapDemo.html",{'form':userForm})
 
-
-# def search_courses(request):
-#     if request.user.is_authenticated:
-#         coursesList = Course.objects.all()
-#         paginator  = Paginator(coursesList, 5)
-#         page = request.GET.get('page' , 1)
-#         courses = paginator.get_page(page)
-#         return render(request, 'search_courses.html', {'courses': courses})
-#     else:
-#         return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
-
 def my_courses(request):
     pass
-
-
-# def listing(requset):
-#     contactList = CustomUser.objects.all()
-#     paginator  = Paginator(contactList, 2)
-#     page = requset.GET.get('page' , 1)
-#     return render(requset, 'dashboard.html', {'contacts',contactList})
