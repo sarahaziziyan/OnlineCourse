@@ -54,7 +54,7 @@ def myLogin(request):
     print(user)
     if request.POST:
         if user is None:
-            return render(request, "login.html", {'errorMsg':'نام کاربری یا کلمه عبور اشتباه است'} )
+            return render(request, "login.html", {'errorMsg':'Username or password is wrong'} )
         else:
             customUserType = CustomUser.objects.get(user=user).userType
             coursesList = Course.objects.all()
@@ -66,6 +66,7 @@ def myLogin(request):
             login(request, user)
             request.session['lastLoginTime'] = str(datetime.datetime.now())
             request.session['electronicWallet'] = 100000
+            request.session['userType'] = customUserType
             return render(request, "index.html", args)
     else:
         return render(request, "login.html", {})
@@ -92,20 +93,27 @@ def sign_up(request):
 
         args = {}
         args.update(csrf(request))
-        args['errorMsg'] = 'لطفا وارد شوید'
+        args['errorMsg'] = 'Please login'
         return render(request, "login.html", args);
     else:
-        return render(request, "login.html", {'errorMsg': 'پسورد و تکرار آن متفاوت هستند'});
+        return render(request, "login.html", {'errorMsg': 'The password and repeat password are different'});
 
 
 def logout(request):
-    return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
+    return render(request, "login.html", {'errorMsg': 'Please Login'})
 
 def dashboard_course(request):
     pass
 
 def create_course(request):
-    return render(request, 'create_courses.html' , {'form': CourseForm()})
+    userType = request.session.get('userType', None)
+    if request.user.is_authenticated:
+        if userType == 'instructor':
+            return render(request, 'create_courses.html' , {'title': 'Create Course','form': CourseForm()})
+        else:
+            return render(request, "login.html", {'errorMsg': 'Please login as an instructor'})
+    else:
+        return render(request, "login.html", {'errorMsg': 'Please login'})
 
 def save_course(request):
     pass
@@ -119,7 +127,7 @@ def edit_profile(request):
     if request.user.is_authenticated:
         return render(request, "editProfile.html", {'userForm':userForm , 'form':customUserForm})
     else:
-        return render(request, "login.html", {'errorMsg': 'لطفا وارد شوید'})
+        return render(request, "login.html", {'errorMsg': 'Please login'})
 
 
 def update_profile_data(requset):
