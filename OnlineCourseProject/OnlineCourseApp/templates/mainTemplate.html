@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+<!--    <title>Online Courses</title>-->
+    <title>
+    {% block title %}
+        {{ page_title|default:"Untitled Page" }}
+    {% endblock title %}
+    </title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet" />
+    <!-- FONT AWESOME CSS -->
+<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+     <!-- FLEXSLIDER CSS -->
+<link href="{% static 'css/flexslider.css' %}" rel="stylesheet" />
+    <!-- CUSTOM STYLE CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- Google	Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+    <link href="{% static 'css/onlineCourse.css' %}" rel="stylesheet" />
+</head>
+<body >
+
+ <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img class="logo-custom" src="{% static 'img/logo180-50.png' %}" alt=""  />
+                    {% if username is not None %}
+                        <div id="username" name="firsname_lastname"> WELCOME {{ username }}</div>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="navbar-collapse collapse move-me">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a href="{% url 'index' %}">HOME</a></li>
+                    {% if username is None %}
+                        <li ><a href="{% url 'login' %}" id="loginButtonMenu">LOGIN</a></li>
+                        <li ><a href="{% url 'login' %}" id="signupButtonMenu">SIGNUP</a></li>
+                    {% endif %}
+                    <li><a href="#courseSearch-sec">COURSES</a></li>
+                    {% if userType == 'instructor' %}
+                        <li ><a href="{% url 'create_course' %}">CREATE COURSE</a></li>
+                    {% endif %}
+                    {% if userType == 'student' %}
+                        <li ><a href="{% url 'dashboard_course' %}">MY COURSES</a></li>
+                    {% endif %}
+                    {% if username is not None %}
+                        <li ><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+      <!--NAVBAR SECTION END-->
+
+
+    {% block content %}
+
+    {% endblock content %}
+
+
+    <div id="footer">
+          &copy 2014 sarahaziziyan.com | All Rights Reserved |  <a href="http://sarahaziziyan.com" style="color: #fff" target="_blank">Design by : sarahaziziyan.com</a>
+    </div>
+
+
+     <!-- FOOTER SECTION END-->
+
+    <!--  Jquery Core Script -->
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <!--  Core Bootstrap Script -->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!--  Flexslider Scripts -->
+         <script src="{% static 'js/jquery.flexslider.js' %}"></script>
+     <!--  Scrolling Reveal Script -->
+    <script src="{% static 'js/scrollReveal.js' %}"></script>
+    <!--  Scroll Scripts -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+    <!--  Custom Scripts -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/onlineCourse.js' %}"></script>
+</body>
+</html>
