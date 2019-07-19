@@ -50,3 +50,23 @@ form.searchCourse::after {
 #removeSearch{
     background : red !important;
 }
+
+.formContainer {
+    min-width: 400px;
+    min-height: 400px;
+    max-width: 400px;
+    margin-left: 50px;
+    margin-top: 150px;
+}
+
+.formContainer h1::after {
+    margin: 0 !important;
+    width: inherit;
+}
+
+.formContainer a{
+    width: 60px;
+    height: 30px;
+    background: blue;
+    border: solid 1px black;
+}

@@ -1,8 +1,16 @@
-<form action="{% url 'save_course' %}" method="post">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Save">
+{% extends 'mainTemplate.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+    <div class="formContainer">
+        <h1>{{ title }}</h1>
+        <form action="{% url 'save_course' %}" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Save" class="btn">
 
-</form>
+        </form>
+        <a class="btn" href="index">BACK</a>
+    </div>
+{% endblock content %}
