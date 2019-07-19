@@ -20,7 +20,7 @@ def giveCoursesPage(request,coursesList, args):
     paginator = Paginator(coursesList, 3)
     page = request.GET.get('page', 1)
     courses = paginator.get_page(page)
-    args['courses'] = coursesList
+    args['courses'] = courses
     return render(request, 'index.html', args)
 
 
@@ -40,7 +40,11 @@ def index_premade(request):
 def search_courses(request):
     title = request.POST.get('searchCourseInput', '')
     coursesList = Course.objects.filter(title__contains=title)
-    return giveCoursesPage(request, coursesList)
+    args = {}
+    args.update(csrf(request))
+    args['username'] = request.session.get('username', None)
+    args['userType'] = request.session.get('userType', None)
+    return giveCoursesPage(request, coursesList, args)
 
 
 def remove_search_courses(request):
