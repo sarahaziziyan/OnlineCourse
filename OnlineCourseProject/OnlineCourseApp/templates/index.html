@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Free Education Template</title>
+    <title>Online Courses</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet" />
     <!-- FONT AWESOME CSS -->
@@ -73,9 +73,14 @@
                         <li>
                               <h3>Delivering Quality Education</h3>
                            <h1>THE UNIQUE METHOD</h1>
-                            <a  href="#courseSearch-sec" class="btn btn-info btn-lg" >
-                                GET AWESOME
+                            {% if username is None %}
+                            <a  href="{% url 'login' %}" class="btn btn-info btn-lg" >
+                                LOGIN
                             </a>
+                            {% endif %}
+                            {% if userType == 'instructor' %}
+                                <a href="{% url 'create_course' %}" class="btn btn-info btn-lg">CREATE COURSE</a>
+                            {% endif %}
                              <a  href="#courseSearch-sec" class="btn btn-success btn-lg" >
                                 Search Courses
                             </a>
@@ -86,9 +91,14 @@
                         <li>
                             <h3>Delivering Quality Education</h3>
                            <h1>UNMATCHED APPROACH</h1>
-                             <a  href="#courseSearch-sec" class="btn btn-primary btn-lg" >
-                               GET AWESOME
-                            </a>
+                            {% if username is None %}
+                              <a  href="{% url 'login' %}" class="btn btn-primary btn-lg" >
+                               LOGIN
+                              </a>
+                            {% endif %}
+                            {% if userType == 'instructor' %}
+                                <a href="{% url 'create_course' %}" class="btn btn-info btn-lg">CREATE COURSE</a>
+                            {% endif %}
                              <a  href="#courseSearch-sec" class="btn btn-danger btn-lg" >
                                 Search Courses
                             </a>
@@ -99,9 +109,14 @@
                         <li>
                             <h3>Delivering Quality Education</h3>
                            <h1>AWESOME FACULTY PANEL</h1>
-                             <a  href="#courseSearch-sec" class="btn btn-default btn-lg" >
-                                GET AWESOME
+                            {% if username is None %}
+                             <a  href="{% url 'login' %}" class="btn btn-default btn-lg" >
+                                LOGIN
                             </a>
+                            {% endif %}
+                            {% if userType == 'instructor' %}
+                                <a href="{% url 'create_course' %}" class="btn btn-info btn-lg">CREATE COURSE</a>
+                            {% endif %}
                              <a  href="#courseSearch-sec" class="btn btn-info btn-lg" >
                                 Search Courses
                             </a>

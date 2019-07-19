@@ -6,6 +6,7 @@ from OnlineCourseApp.views import *
 
 urlpatterns = [
     path('', index, name='index'),
+    path('index', index, name='index'),
     path('index_premade', index_premade, name='index_premade'),
     path('admin', admin.site.urls),
     path('sign_up', sign_up, name='sign_up'),
