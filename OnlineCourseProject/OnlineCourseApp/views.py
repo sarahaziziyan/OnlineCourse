@@ -68,13 +68,12 @@ def myLogin(request):
             args.update(csrf(request))
             args['username'] = username
             args['userType'] = customUserType
-            args['courses'] = coursesList
             login(request, user)
             request.session['lastLoginTime'] = str(datetime.datetime.now())
             request.session['electronicWallet'] = 100000
             request.session['userType'] = customUserType
             request.session['username'] = username
-            return render(request, "index.html", args)
+            return giveCoursesPage(request, coursesList, args)
     else:
         return render(request, "login.html", {})
 
