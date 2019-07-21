@@ -22,6 +22,7 @@ urlpatterns = [
     path('my_courses', my_courses, name ='my_courses'),
     path('edit_profile', edit_profile, name ='edit_profile'),
     path('bootstrapDemo', bootstrapDemo),
+    path('chooseCourse', chooseCourse, name='chooseCourse'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

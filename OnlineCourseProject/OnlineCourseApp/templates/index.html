@@ -118,6 +118,10 @@
                 <th scope="col">title</th>
                 <th scope="col">price</th>
                 <th scope="col">category</th>
+                {% if userType == 'student' %}
+                    <th scope="col"></th>
+                {% endif %}
+
             </tr>
         </thead>
         {% for course in courses %}
@@ -127,6 +131,15 @@
                 <td>{{course.title}}</td>
                 <td>{{course.price}} $</td>
                 <td>{{course.category}}</td>
+                {% if userType == 'student' %}
+                    <td>
+                        <form action="{% url 'chooseCourse' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name='courseId' value="{{course.courseId}}">
+                            <input type="submit" value="Choose Course">
+                        </form>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

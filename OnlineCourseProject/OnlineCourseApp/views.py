@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.template.context_processors import csrf
 
 from .forms import *
-from .models import CustomUser, Course, Instructor, Student
+from .models import CustomUser, Course, Instructor, Student, StudentCourse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import *
@@ -113,6 +113,7 @@ def logout(request):
 def dashboard_course(request):
     pass
 
+
 def create_course(request):
     userType = request.session.get('userType', None)
     if request.user.is_authenticated:
@@ -136,6 +137,15 @@ def save_course(request):
     args['username'] = request.session.get('username', None)
     args['userType'] = request.session.get('userType', None)
     return giveCoursesPage(request, coursesList, args)
+
+def chooseCourse(request):
+    username = request.session.get('username', None)
+    courseId = request.POST['courseId']
+    course = Course.objects.filter(courseId=courseId)
+    student = Student.objects.filter(customUser=CustomUser.objects.filter(user=User.objects.filter(username=username)))
+    student_course_ins = StudentCourse.objects.create(Student=student, Course=course)
+    student_course_ins.save()
+
 
 
 def edit_profile(request):
