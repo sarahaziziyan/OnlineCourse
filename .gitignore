@@ -2,4 +2,5 @@
 .idea/
 venv
 *.pyc
+OnlineCourseProject/OnlineCourseProject/__pycache__
 db.sqlite3
